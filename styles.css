@@ -1,303 +1,350 @@
-/* IMPORTS */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
 
 :root {
-    --neon-cyan: #00f3ff;
-    --neon-pink: #ff00ff;
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff0055;
     --neon-yellow: #fcee0a;
-    --bg-dark: #050505;
-    --glass: rgba(10, 10, 10, 0.85);
-    --font-head: 'Orbitron', sans-serif;
-    --font-body: 'Rajdhani', sans-serif;
+    --neon-green: #0aff0a;
+    --glass-bg: rgba(0, 0, 0, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-* { 
+* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--bg-dark);
-    font-family: var(--font-body);
+    font-family: 'Rajdhani', sans-serif;
+    background-color: #000;
     color: #fff;
     overflow-x: hidden;
     min-height: 100vh;
-    perspective: 1000px; /* ENABLES 3D SPACE */
 }
 
-/* --- THE CYBER BOULEVARD BACKGROUND --- */
+/* --- THE IMMERSIVE BACKGROUND --- */
 .cyber-world {
     position: fixed;
     top: 0; 
     left: 0; 
     width: 100%; 
     height: 100%;
+    /* Uses actual image if available, fallback to gradient */
     background: 
-        linear-gradient(to bottom, #000 0%, #111 100%),
-        repeating-linear-gradient(90deg, transparent 0, transparent 40px, rgba(0, 243, 255, 0.03) 40px, rgba(0, 243, 255, 0.03) 41px),
-        repeating-linear-gradient(0deg, transparent 0, transparent 40px, rgba(188, 19, 254, 0.03) 40px, rgba(188, 19, 254, 0.03) 41px);
+        url('bg-cyber.jpg') no-repeat center center fixed,
+        linear-gradient(to bottom, #0a0a0a 0%, #000 50%, #0a0a0a 100%);
+    background-size: cover;
     z-index: -2;
-    transform-style: preserve-3d;
 }
 
-/* The Floor Grid (Street) */
-.cyber-floor {
-    position: absolute;
-    bottom: -50%;
-    left: -50%;
-    width: 200%;
+/* Overlay to darken the BG so text is readable */
+.cyber-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
     height: 100%;
-    background: 
-        linear-gradient(transparent 20%, #000 90%),
-        repeating-linear-gradient(0deg, transparent 0, transparent 50px, rgba(0, 243, 255, 0.2) 50px, rgba(0, 243, 255, 0.2) 52px),
-        repeating-linear-gradient(90deg, transparent 0, transparent 100px, rgba(0, 243, 255, 0.2) 100px, rgba(0, 243, 255, 0.2) 102px);
-    transform: rotateX(60deg);
-    animation: moveStreet 10s linear infinite;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%);
     z-index: -1;
+    pointer-events: none;
 }
 
-@keyframes moveStreet {
-    from { background-position: 0 0; }
-    to { background-position: 0 1000px; }
+/* Scanline Effect (CRT TV vibe) */
+.scanlines {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.2)
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.3;
 }
 
-/* --- LAYOUT: THE ALLEY --- */
+/* --- LAYOUT GRID --- */
 .layout-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    max-width: 1600px;
+    padding-top: 40px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding-top: 50px;
     position: relative;
-    transform-style: preserve-3d;
+    gap: 20px;
 }
 
-/* --- SIDE SIGNS (The Use Cases) --- */
-.alley-side {
-    width: 300px;
+/* --- VERTICAL NEON SIGNS (The "Clutter") --- */
+.neon-column {
     display: flex;
     flex-direction: column;
-    gap: 60px;
-    margin-top: 100px;
-    padding: 20px;
+    gap: 30px;
+    margin-top: 50px;
+    width: 120px;
 }
 
-.left-wall {
-    transform: rotateY(25deg) translateX(20px);
-    text-align: right;
+/* Hide side columns on mobile */
+@media (max-width: 1000px) {
+    .neon-column { display: none; }
 }
 
-.right-wall {
-    transform: rotateY(-25deg) translateX(-20px);
-    text-align: left;
-}
-
-.neon-sign {
-    border: 2px solid;
-    padding: 15px;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(5px);
+.vertical-sign {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    padding: 20px 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
     text-transform: uppercase;
-    font-family: var(--font-head);
+    text-align: center;
+    border: 3px solid;
+    letter-spacing: 5px;
+    background: rgba(0, 0, 0, 0.8);
     position: relative;
-    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    transition: transform 0.3s;
+    min-height: 150px;
 }
 
-/* Sign Colors & Glows */
-.sign-cyan {
-    border-color: var(--neon-cyan);
-    color: var(--neon-cyan);
-    box-shadow: 0 0 15px var(--neon-cyan), inset 0 0 10px var(--neon-cyan);
-    text-shadow: 0 0 5px var(--neon-cyan);
-    animation: flicker 4s infinite alternate;
+.vertical-sign:hover {
+    transform: scale(1.05);
 }
 
-.sign-pink {
-    border-color: var(--neon-pink);
-    color: var(--neon-pink);
-    box-shadow: 0 0 15px var(--neon-pink), inset 0 0 10px var(--neon-pink);
-    text-shadow: 0 0 5px var(--neon-pink);
-    animation: flicker 6s infinite alternate-reverse;
+/* Sign Variants */
+.sign-red {
+    color: #ff003c;
+    border-color: #ff003c;
+    text-shadow: 0 0 10px #ff003c, 0 0 20px #ff003c;
+    box-shadow: 0 0 15px #ff003c, inset 0 0 10px #ff003c;
+    animation: flicker-slow 4s infinite;
+}
+
+.sign-blue {
+    color: var(--neon-blue);
+    border-color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-blue), inset 0 0 10px var(--neon-blue);
 }
 
 .sign-yellow {
-    border-color: var(--neon-yellow);
     color: var(--neon-yellow);
+    border-color: var(--neon-yellow);
+    text-shadow: 0 0 10px var(--neon-yellow);
     box-shadow: 0 0 15px var(--neon-yellow), inset 0 0 10px var(--neon-yellow);
-    text-shadow: 0 0 5px var(--neon-yellow);
+    animation: flicker-fast 3s infinite;
 }
 
-.sign-sub {
+.sign-pink {
+    color: var(--neon-pink);
+    border-color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+    box-shadow: 0 0 15px var(--neon-pink), inset 0 0 10px var(--neon-pink);
+}
+
+/* Kanji/Symbol Decorations */
+.sign-red::after {
+    content: "禁止";
     display: block;
-    font-size: 0.6em;
-    color: #fff;
-    margin-top: 5px;
-    font-family: var(--font-body);
-    letter-spacing: 2px;
-    text-shadow: none;
+    margin-top: 10px;
+    font-size: 0.8em;
+    opacity: 0.8;
 }
 
-/* --- CENTER TERMINAL (Your App) --- */
+.sign-blue::after {
+    content: "電脳";
+    display: block;
+    margin-top: 10px;
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+
+/* --- MAIN TERMINAL (Glassmorphism) --- */
 .main-terminal {
     flex: 1;
-    max-width: 800px;
-    background: var(--glass);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-top: 2px solid var(--neon-cyan);
-    border-bottom: 2px solid var(--neon-pink);
-    padding: 40px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    max-width: 600px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 2px;
+    padding: 30px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.9);
     position: relative;
     z-index: 10;
 }
 
-/* Header Styling */
+/* Holographic Header */
 header h1 {
-    font-family: var(--font-head);
-    font-size: 3em;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5em;
     text-align: center;
     color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    text-shadow: 0 0 20px var(--neon-cyan);
-    margin-bottom: 10px;
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+    line-height: 1.2;
 }
 
 .subtitle {
     text-align: center;
     color: var(--neon-pink);
-    letter-spacing: 3px;
-    font-size: 1.2em;
-    margin-bottom: 40px;
+    letter-spacing: 2px;
+    font-size: 1em;
+    margin-bottom: 30px;
     text-transform: uppercase;
 }
 
-/* Form Styling */
+/* Card styling */
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-blue);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2em;
+}
+
+/* Inputs */
 .form-group {
     margin-bottom: 20px;
 }
 
 .form-group label {
-    color: var(--neon-cyan);
-    font-size: 1.1em;
+    color: var(--neon-blue);
+    font-size: 0.9em;
     letter-spacing: 1px;
+    text-transform: uppercase;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 input {
     width: 100%;
-    padding: 15px;
-    background: rgba(0,0,0,0.8);
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.6);
     border: 1px solid #333;
     color: #fff;
-    font-family: var(--font-body);
-    font-size: 1.2em;
-    margin-top: 10px;
+    font-family: 'Rajdhani', monospace;
+    font-size: 1.1em;
+    transition: 0.3s;
 }
 
 input:focus {
     outline: none;
-    border-color: var(--neon-yellow);
-    box-shadow: 0 0 15px rgba(252, 238, 10, 0.3);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(10, 255, 10, 0.2);
 }
 
 /* Buttons */
 .btn {
     width: 100%;
     padding: 15px;
-    font-family: var(--font-head);
-    font-size: 1.2em;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: 0.3s;
     border: none;
-    margin-top: 10px;
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    margin-top: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s;
 }
 
 .btn-primary {
-    background: var(--neon-cyan);
-    color: #000;
-    font-weight: 800;
+    background: linear-gradient(90deg, #000, var(--neon-blue), #000);
+    background-size: 200% auto;
+    color: #fff;
+    border: 1px solid var(--neon-blue);
+    animation: shine 3s linear infinite;
 }
 
 .btn-primary:hover:not(:disabled) {
-    box-shadow: 0 0 30px var(--neon-cyan);
+    box-shadow: 0 0 30px var(--neon-blue);
     transform: scale(1.02);
 }
 
 .btn-primary:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    animation: none;
 }
 
 .btn-success {
-    background: var(--neon-yellow);
+    background: var(--neon-green);
     color: #000;
-    font-weight: 800;
-    margin-top: 30px;
+    box-shadow: 0 0 20px var(--neon-green);
 }
 
 .btn-success:hover:not(:disabled) {
-    box-shadow: 0 0 30px var(--neon-yellow);
+    box-shadow: 0 0 30px var(--neon-green);
+    transform: scale(1.02);
 }
 
 .btn-success:disabled {
-    opacity: 0.5;
+    background: #333;
+    color: #777;
+    box-shadow: none;
     cursor: not-allowed;
 }
 
 .btn-danger {
     background: transparent;
-    color: #ff0055;
-    border: 1px solid #ff0055;
+    color: var(--neon-pink);
+    border: 1px solid var(--neon-pink);
     margin-top: 10px;
     font-size: 0.9em;
-    clip-path: none;
 }
 
 .btn-danger:hover:not(:disabled) {
-    background: #ff0055;
+    background: var(--neon-pink);
     color: #000;
-    box-shadow: 0 0 20px #ff0055;
+    box-shadow: 0 0 20px var(--neon-pink);
 }
 
 /* Fee Display */
 .fee-info {
-    border-left: 3px solid var(--neon-pink);
-    background: rgba(255, 0, 255, 0.05);
-    padding: 15px;
     margin: 20px 0;
+    padding: 10px;
+    background: rgba(255,0,255,0.1);
+    border: 1px solid var(--neon-pink);
+}
+
+.fee-info p {
+    color: var(--neon-pink);
+    font-size: 0.8em;
+    margin: 5px 0;
 }
 
 .wallet-info {
-    border-left: 3px solid var(--neon-cyan);
-    background: rgba(0, 243, 255, 0.05);
+    margin-top: 20px;
+    border-left: 2px solid var(--neon-blue);
+    padding-left: 10px;
     padding: 15px;
-    margin: 20px 0;
+    background: rgba(0, 243, 255, 0.05);
 }
 
-/* Card styling for sections */
-.card {
-    background: rgba(0,0,0,0.4);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    backdrop-filter: blur(10px);
-}
-
-.card h2 {
-    font-family: var(--font-head);
-    color: var(--neon-cyan);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+.wallet-info p {
+    color: #888;
+    font-size: 0.8em;
+    margin: 5px 0;
 }
 
 /* Hidden class */
@@ -307,8 +354,8 @@ input:focus {
 
 /* Animation stages */
 .stage-text {
-    font-family: var(--font-head);
-    color: var(--neon-cyan);
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-blue);
     font-size: 1.4em;
     text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
     margin-bottom: 20px;
@@ -316,9 +363,10 @@ input:focus {
 
 #progressBar {
     width: 0%;
-    height: 5px;
-    background: var(--neon-yellow);
-    margin-top: 10px;
+    height: 2px;
+    background: var(--neon-green);
+    margin-top: 15px;
+    box-shadow: 0 0 10px var(--neon-green);
     transition: width 0.3s ease;
 }
 
@@ -330,66 +378,7 @@ input:focus {
     font-size: 0.9em;
 }
 
-/* --- ANIMATIONS --- */
-@keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-    20%, 24%, 55% { opacity: 0.4; }
-}
-
-/* Rain Effect */
-.rain {
-    position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    background-image: 
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px);
-    animation: rain 0.5s linear infinite;
-    opacity: 0.2;
-    pointer-events: none;
-    z-index: 1;
-}
-
-@keyframes rain {
-    0% { background-position: 0 0; }
-    100% { background-position: 10% 100%; }
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-    .alley-side { 
-        display: none; /* Hide signs on small screens */
-    }
-    .main-terminal { 
-        width: 95%;
-        margin: 0 auto;
-    }
-    .layout-container {
-        flex-direction: column;
-    }
-}
-
-/* Small text styling */
-small {
-    color: #666;
-    display: block;
-    margin-top: 5px;
-    font-size: 0.85em;
-}
-
-/* Links */
-a {
-    color: var(--neon-cyan);
-    text-decoration: underline;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--neon-yellow);
-}
-
-/* Warning banner styling */
+/* Warning banner */
 .warning-banner {
     border-color: #ffaa00;
     background: rgba(255, 170, 0, 0.05);
@@ -417,5 +406,55 @@ a:hover {
     color: var(--neon-yellow);
     margin-top: 10px;
     text-align: center;
-    font-family: var(--font-body);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Links */
+a {
+    color: var(--neon-blue);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--neon-yellow);
+}
+
+/* Small text */
+small {
+    color: #666;
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85em;
+}
+
+/* Animations */
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+@keyframes flicker-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+    52% { opacity: 0.2; }
+    54% { opacity: 0.8; }
+}
+
+@keyframes flicker-fast {
+    0%, 100% { opacity: 1; }
+    3% { opacity: 0.1; }
+    6% { opacity: 1; }
+    7% { opacity: 0.1; }
+    8% { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .main-terminal {
+        width: 95%;
+        margin: 0 auto;
+    }
+    .layout-container {
+        flex-direction: column;
+    }
 }

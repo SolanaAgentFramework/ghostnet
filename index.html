@@ -29,34 +29,30 @@
 </head>
 <body>
 
-    <div class="cyber-world">
-        <div class="cyber-floor"></div>
-    </div>
-    <div class="rain"></div>
+    <div class="cyber-world"></div>
+    <div class="cyber-overlay"></div>
+    <div class="scanlines"></div>
 
     <div class="layout-container">
 
-        <!-- LEFT WALL: Use Cases -->
-        <div class="alley-side left-wall">
-            <div class="neon-sign sign-cyan">
-                GHOST SHARDING
-                <span class="sign-sub">Packet Fragmentation</span>
+        <!-- LEFT COLUMN: Vertical Neon Signs -->
+        <div class="neon-column">
+            <div class="vertical-sign sign-red">
+                NO<br>LOGS
             </div>
-            <div class="neon-sign sign-pink">
-                NO LOGS
-                <span class="sign-sub">Zero-Trace Server</span>
+            <div class="vertical-sign sign-blue">
+                GHOST<br>NET
             </div>
-            <div class="neon-sign sign-cyan">
-                RPC ROTATION
-                <span class="sign-sub">IP Masking Active</span>
+            <div class="vertical-sign sign-yellow" style="font-size: 0.8em;">
+                SYSTEM<br>SECURE
             </div>
         </div>
 
         <!-- CENTER TERMINAL: Main App -->
         <div class="main-terminal">
             <header>
-                <h1>SOLANA PRIVACY</h1>
-                <div class="subtitle">Next-Gen Anonymity Protocol</div>
+                <h1>SOLANA<br>PRIVACY</h1>
+                <div class="subtitle">PROTOCOL: DEAD_DROP // ENCRYPTED</div>
             </header>
 
             <!-- Devnet Warning Banner -->
@@ -76,15 +72,12 @@
             </div>
 
             <!-- Wallet Connection Section -->
-            <div class="card">
-                <h2>WALLET CONNECTION</h2>
-                <button id="connectWallet" class="btn btn-primary">
-                    INITIALIZE CONNECTION
-                </button>
-                <div id="walletInfo" class="wallet-info hidden">
-                    <p><strong>STATUS:</strong> <span style="color:var(--neon-cyan)">CONNECTED</span></p>
-                    <p><strong>ID:</strong> <span id="walletAddress" style="font-family:monospace">...</span></p>
-                    <p><strong>BALANCE:</strong> <span id="walletBalance">0 SOL</span></p>
+            <div id="walletSection">
+                <button id="connectWallet" class="btn btn-primary">CONNECT TERMINAL</button>
+                <div id="walletInfo" class="hidden" style="margin-top: 20px; border-left: 2px solid var(--neon-blue); padding-left: 10px;">
+                    <p style="color: #888; font-size: 0.8em;">IDENTITY LINKED:</p>
+                    <p id="walletAddress" style="font-family: monospace; color: var(--neon-blue);">...</p>
+                    <p id="walletBalance" style="color: #fff;">...</p>
                     <button id="disconnectWallet" class="btn btn-danger">
                         DISCONNECT
                     </button>
@@ -92,40 +85,36 @@
             </div>
 
             <!-- Transfer Form -->
-            <div class="card">
-                <h2>ANONYMOUS TRANSFER</h2>
-                <form id="transferForm">
-                    <div class="form-group">
-                        <label for="destinationAddress">TARGET DESTINATION</label>
-                        <input 
-                            type="text" 
-                            id="destinationAddress" 
-                            placeholder="Enter Solana Address"
-                            autocomplete="off"
-                            required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">AMOUNT (SOL)</label>
-                        <input 
-                            type="number" 
-                            id="amount" 
-                            step="0.000000001"
-                            min="0.003"
-                            placeholder="0.003 (minimum)"
-                            required
-                        >
-                        <small>Minimum: 0.003 SOL to cover service costs</small>
-                    </div>
-                    <div class="fee-info">
-                        <p>SERVICE FEE (0.35%): <span id="serviceFee">0.00 SOL</span></p>
-                        <p style="font-size: 1.2em; color: #fff;">TOTAL REQUIRED: <span id="totalAmount">0.00 SOL</span></p>
-                    </div>
-                    <button type="submit" id="sendButton" class="btn btn-success" disabled>
-                        EXECUTE ANONYMOUS TRANSFER
-                    </button>
-                </form>
-            </div>
+            <form id="transferForm" style="margin-top: 30px;">
+                <div class="form-group">
+                    <label for="destinationAddress">TARGET COORDINATES (ADDRESS)</label>
+                    <input 
+                        type="text" 
+                        id="destinationAddress" 
+                        placeholder="Enter Destination..."
+                        autocomplete="off"
+                        required
+                    >
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="amount">QUANTITY (SOL)</label>
+                    <input 
+                        type="number" 
+                        id="amount" 
+                        step="0.000000001"
+                        min="0.003"
+                        placeholder="0.0"
+                        required
+                    >
+                    <small>Minimum: 0.003 SOL to cover service costs</small>
+                </div>
+                <div class="fee-info" style="margin: 20px 0; padding: 10px; background: rgba(255,0,255,0.1); border: 1px solid var(--neon-pink);">
+                    <p style="color: var(--neon-pink); font-size: 0.8em;">NETWORK FEE ESTIMATE:</p>
+                    <p style="color: #fff; font-size: 1.1em; margin-top: 5px;">SERVICE FEE (0.35%): <span id="serviceFee">0.00 SOL</span></p>
+                    <p style="color: #fff; font-size: 1.2em; margin-top: 5px;">TOTAL REQUIRED: <span id="totalAmount">0.00 SOL</span></p>
+                </div>
+                <button type="submit" id="sendButton" class="btn btn-success" disabled>INITIATE TRANSFER</button>
+            </form>
 
             <!-- Devnet Faucet Section -->
             <div class="card faucet-container">
@@ -155,11 +144,10 @@
             </div>
 
             <!-- Privacy Animation Section -->
-            <div class="card hidden" id="animationCard" style="margin-top: 30px; text-align: center;">
-                <h2>PRIVACY PROCESSING</h2>
-                <div id="stage1" class="stage-text">INITIALIZING NODES...</div>
-                <div id="progressBar" style="width: 0%; height: 5px; background: var(--neon-yellow); margin-top: 10px;"></div>
-                <div id="txHash" style="margin-top: 20px; color: var(--neon-cyan); word-break: break-all;"></div>
+            <div id="animationCard" class="hidden" style="margin-top: 30px; text-align: center;">
+                <div id="stage1" class="stage-text" style="color: var(--neon-blue);">ROUTING SHARDS...</div>
+                <div id="progressBar" style="width: 0%; height: 2px; background: var(--neon-green); margin-top: 15px; box-shadow: 0 0 10px var(--neon-green);"></div>
+                <div id="txHash" style="margin-top: 20px; color: var(--neon-blue); word-break: break-all; font-family: monospace; font-size: 0.9em;"></div>
                 
                 <!-- Additional animation stages (preserved for app.js compatibility) -->
                 <div class="hidden" id="stage2"></div>
@@ -218,20 +206,15 @@
             </div>
         </div>
 
-        <!-- RIGHT WALL: Use Cases -->
-        <div class="alley-side right-wall">
-            <div class="neon-sign sign-yellow">
-                MIXING POOL
-                <span class="sign-sub">High-Entropy Routing</span>
+        <!-- RIGHT COLUMN: Vertical Neon Signs -->
+        <div class="neon-column">
+            <div class="vertical-sign sign-blue">
+                MIXER<br>ACTIVE
             </div>
-            <div class="neon-sign sign-pink">
-                BLACK MIRROR
-                <span class="sign-sub">Dual-Vault System</span>
+            <div class="vertical-sign sign-red" style="animation-delay: 1s;">
+                DATA<br>PURGE
             </div>
-            <div class="neon-sign sign-yellow">
-                ANTI-MEV
-                <span class="sign-sub">Sandwich Protection</span>
-            </div>
+            <div style="height: 100px; border: 2px solid var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); background: rgba(255, 0, 85, 0.1);"></div>
         </div>
 
     </div>
