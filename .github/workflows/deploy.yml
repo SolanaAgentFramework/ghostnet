@@ -31,12 +31,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: |
-            index.html
-            styles.css
-            app.js
-            tutorial.html
-            config.json
+          path: '.'
       
       - name: Deploy to GitHub Pages
         id: deployment
