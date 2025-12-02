@@ -229,7 +229,6 @@ async function transfer(e) {
         await animate();
         
         // Call backend to route through mixing pool to destination
-        const apiUrl = (typeof CONFIG !== 'undefined' && CONFIG.API_URL) ? CONFIG.API_URL : 'https://dead-drop-backend.onrender.com';
         const response = await fetch(`${apiUrl}/api/transfer`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
