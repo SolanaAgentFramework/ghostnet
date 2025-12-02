@@ -3,52 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solana Privacy Transfer - Anonymous Transactions</title>
+    <title>Solana Privacy Transfer | Dark Web Protocol</title>
     <link rel="stylesheet" href="/styles.css">
     <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
     <!-- config.js is now merged into app.js (obfuscated) -->
-    <!-- View Real Flow: <a href="/diagram.html" style="color: #00ff00;">See Actual Transaction Flow</a> -->
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🔒 Solana Privacy Transfer</h1>
-            <p class="subtitle">Next-generation anonymous transactions with quantum-safe encryption</p>
-        </header>
 
-        <div class="main-content">
+    <div class="cyber-world">
+        <div class="cyber-floor"></div>
+    </div>
+    <div class="rain"></div>
+
+    <div class="layout-container">
+
+        <!-- LEFT WALL: Use Cases -->
+        <div class="alley-side left-wall">
+            <div class="neon-sign sign-cyan">
+                GHOST SHARDING
+                <span class="sign-sub">Packet Fragmentation</span>
+            </div>
+            <div class="neon-sign sign-pink">
+                NO LOGS
+                <span class="sign-sub">Zero-Trace Server</span>
+            </div>
+            <div class="neon-sign sign-cyan">
+                RPC ROTATION
+                <span class="sign-sub">IP Masking Active</span>
+            </div>
+        </div>
+
+        <!-- CENTER TERMINAL: Main App -->
+        <div class="main-terminal">
+            <header>
+                <h1>SOLANA PRIVACY</h1>
+                <div class="subtitle">Next-Gen Anonymity Protocol</div>
+            </header>
+
+            <!-- Devnet Warning Banner -->
+            <div class="card warning-banner" style="margin-bottom: 25px;">
+                <h2>⚠️ DEVNET TEST PAGE ⚠️</h2>
+                <p style="color: #ffaa00; font-size: 1.1em; margin: 10px 0;">
+                    🚰 FAUCET GIVES <strong>DEVNET SOL ONLY</strong> 🚰
+                </p>
+                <p style="color: #aaa; font-size: 0.9em; margin-top: 10px;">
+                    This is a testing environment. All transactions are on Solana Devnet.
+                </p>
+                <p style="margin-top: 15px;">
+                    <a href="/tutorial.html" style="color: var(--neon-cyan);">
+                        📚 Don't know how to switch Phantom to Devnet? Click here for tutorial! 🎥
+                    </a>
+                </p>
+            </div>
+
             <!-- Wallet Connection Section -->
             <div class="card">
-                <h2>Wallet Connection</h2>
-                <div class="wallet-section">
-                    <button id="connectWallet" class="btn btn-primary">
-                        Connect Phantom Wallet
+                <h2>WALLET CONNECTION</h2>
+                <button id="connectWallet" class="btn btn-primary">
+                    INITIALIZE CONNECTION
+                </button>
+                <div id="walletInfo" class="wallet-info hidden">
+                    <p><strong>STATUS:</strong> <span style="color:var(--neon-cyan)">CONNECTED</span></p>
+                    <p><strong>ID:</strong> <span id="walletAddress" style="font-family:monospace">...</span></p>
+                    <p><strong>BALANCE:</strong> <span id="walletBalance">0 SOL</span></p>
+                    <button id="disconnectWallet" class="btn btn-danger">
+                        DISCONNECT
                     </button>
-                    <div id="walletInfo" class="wallet-info hidden">
-                        <p><strong>Connected:</strong> <span id="walletAddress"></span></p>
-                        <p><strong>Balance:</strong> <span id="walletBalance">0 SOL</span></p>
-                        <button id="disconnectWallet" class="btn" style="margin-top: 10px; background: transparent; color: #ff0055; border: 1px solid #ff0055; padding: 10px 20px; font-size: 0.9em;">
-                            DISCONNECT
-                        </button>
-                    </div>
                 </div>
             </div>
 
             <!-- Transfer Form -->
             <div class="card">
-                <h2>Anonymous Transfer</h2>
+                <h2>ANONYMOUS TRANSFER</h2>
                 <form id="transferForm">
                     <div class="form-group">
-                        <label for="destinationAddress">Destination Address (Wallet B)</label>
+                        <label for="destinationAddress">TARGET DESTINATION</label>
                         <input 
                             type="text" 
                             id="destinationAddress" 
-                            placeholder="Enter Solana wallet address"
+                            placeholder="Enter Solana Address"
+                            autocomplete="off"
                             required
                         >
                     </div>
                     <div class="form-group">
-                        <label for="amount">Amount (SOL)</label>
+                        <label for="amount">AMOUNT (SOL)</label>
                         <input 
                             type="number" 
                             id="amount" 
@@ -57,57 +96,35 @@
                             placeholder="0.003 (minimum)"
                             required
                         >
-                        <small style="color: #666; display: block; margin-top: 5px;">
-                            Minimum: 0.003 SOL to cover service costs
-                        </small>
+                        <small>Minimum: 0.003 SOL to cover service costs</small>
                     </div>
                     <div class="fee-info">
-                        <p>Service Fee: <span id="serviceFee">0.35%</span></p>
-                        <p>Total (including fees): <span id="totalAmount">0.0 SOL</span></p>
+                        <p>SERVICE FEE (0.35%): <span id="serviceFee">0.00 SOL</span></p>
+                        <p style="font-size: 1.2em; color: #fff;">TOTAL REQUIRED: <span id="totalAmount">0.00 SOL</span></p>
                     </div>
                     <button type="submit" id="sendButton" class="btn btn-success" disabled>
-                        Send Anonymous Transfer
+                        EXECUTE ANONYMOUS TRANSFER
                     </button>
                 </form>
             </div>
 
-            <!-- Devnet Warning Banner -->
-            <div class="card" style="border-color: #ffaa00; background: rgba(255, 170, 0, 0.05); margin-bottom: 25px;">
-                <div style="text-align: center;">
-                    <h2 style="color: #ffaa00; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 3px;">
-                        ⚠️ DEVNET TEST PAGE ⚠️
-                    </h2>
-                    <p style="color: #ffaa00; font-family: var(--font-code); font-size: 1.1em; margin: 0;">
-                        🚰 FAUCET GIVES <strong>DEVNET SOL ONLY</strong> 🚰
-                    </p>
-                    <p style="color: #aaa; font-size: 0.9em; margin-top: 10px;">
-                        This is a testing environment. All transactions are on Solana Devnet.
-                    </p>
-                    <p style="margin-top: 15px;">
-                        <a href="/tutorial.html" style="color: var(--neon-green); text-decoration: underline; font-family: var(--font-code);">
-                            📚 Don't know how to switch Phantom to Devnet? Click here for tutorial! 🎥
-                        </a>
-                    </p>
-                </div>
-            </div>
-
             <!-- Devnet Faucet Section -->
-            <div class="card" style="border-color: var(--neon-green);">
-                <h2>🚰 Devnet Faucet</h2>
+            <div class="card faucet-container">
+                <h2>🚰 DEVNET FAUCET</h2>
                 <p style="color: #aaa; margin-bottom: 15px;">
                     Get 0.02 DEVNET SOL for testing (Rate limit: 1 hour per IP/wallet)
                     <br>
-                    <a href="/tutorial.html" style="color: var(--neon-blue); text-decoration: underline; font-size: 0.9em;">
+                    <a href="/tutorial.html" style="color: var(--neon-cyan); font-size: 0.9em;">
                         📖 New to Devnet? Read the tutorial
                     </a>
                 </p>
                 
                 <div id="faucetWalletInfo" class="wallet-info hidden" style="margin-bottom: 20px;">
-                    <p style="margin: 5px 0;"><strong>Connected Wallet:</strong> <span id="faucetWalletAddress" style="color: var(--neon-green); font-family: var(--font-code);"></span></p>
+                    <p style="margin: 5px 0;"><strong>Connected Wallet:</strong> <span id="faucetWalletAddress" style="color: var(--neon-yellow); font-family: monospace;"></span></p>
                 </div>
                 
                 <div id="faucetNotConnected" style="padding: 15px; background: rgba(255, 0, 85, 0.1); border: 1px solid #ff0055; border-radius: 2px; margin-bottom: 15px;">
-                    <p style="color: #ff0055; margin: 0; font-family: var(--font-code);">
+                    <p style="color: #ff0055; margin: 0;">
                         ⚠️ Connect your Phantom wallet first to use the faucet!
                     </p>
                 </div>
@@ -115,168 +132,89 @@
                 <button id="faucetButton" onclick="requestAirdrop()" class="btn btn-success" style="width: 100%; font-size: 1.2em; font-weight: bold;" disabled>
                     🎁 GIMME 0.02 DEVNET SOL 🎁
                 </button>
-                <p id="faucetStatus" style="color: var(--neon-green); margin-top: 15px; font-family: var(--font-code); font-size: 0.9em; min-height: 20px;"></p>
+                <p id="faucetStatus" style="color: var(--neon-yellow); margin-top: 15px; font-size: 0.9em; min-height: 20px;"></p>
             </div>
 
             <!-- Privacy Animation Section -->
-            <div class="card hidden" id="animationCard">
-                <h2>Privacy Processing</h2>
-                <div class="privacy-animation">
-                    <div class="animation-stage" id="stage1">
-                        <div class="privacy-level-badge">Level 1</div>
-                        <div class="glitch-overlay"></div>
-                        <div class="node-container">
-                            <div class="privacy-node active">
-                                <div class="node-pulse"></div>
-                            </div>
-                            <div class="privacy-node">
-                                <div class="node-pulse"></div>
-                            </div>
-                            <div class="privacy-node">
-                                <div class="node-pulse"></div>
-                            </div>
-                        </div>
-                        <div class="connection-lines">
-                            <div class="connection-line"></div>
-                            <div class="connection-line"></div>
-                        </div>
-                        <p class="stage-text">Initializing Privacy Nodes...</p>
-                        <p class="stage-subtext">Activating 3 distributed privacy nodes across global network</p>
-                    </div>
-                    <div class="animation-stage hidden" id="stage2">
-                        <div class="privacy-level-badge">Level 2</div>
-                        <div class="relay-container">
-                            <div class="relay-line">
-                                <div class="data-packet"></div>
-                            </div>
-                            <div class="relay-node">
-                                <div class="relay-core"></div>
-                            </div>
-                            <div class="relay-line">
-                                <div class="data-packet"></div>
-                            </div>
-                        </div>
-                        <div class="relay-network">
-                            <div class="network-node"></div>
-                            <div class="network-node"></div>
-                            <div class="network-node"></div>
-                        </div>
-                        <p class="stage-text">Routing Through Secure Relays...</p>
-                        <p class="stage-subtext">Establishing encrypted relay connections through 12+ nodes</p>
-                    </div>
-                    <div class="animation-stage hidden" id="stage3">
-                        <div class="privacy-level-badge">Level 3</div>
-                        <div class="encryption-container">
-                            <div class="encryption-layers">
-                                <div class="encryption-layer">
-                                    <div class="encryption-pattern"></div>
-                                </div>
-                                <div class="encryption-layer">
-                                    <div class="encryption-pattern"></div>
-                                </div>
-                                <div class="encryption-layer">
-                                    <div class="encryption-pattern"></div>
-                                </div>
-                            </div>
-                            <div class="quantum-particles">
-                                <div class="quantum-particle"></div>
-                                <div class="quantum-particle"></div>
-                                <div class="quantum-particle"></div>
-                                <div class="quantum-particle"></div>
-                            </div>
-                        </div>
-                        <p class="stage-text">Applying Quantum-Safe Encryption...</p>
-                        <p class="stage-subtext">Multi-layer encryption protocol engaged • AES-256 + Post-Quantum algorithms</p>
-                    </div>
-                    <div class="animation-stage hidden" id="stage7">
-                        <div class="privacy-level-badge">Level 4</div>
-                        <div class="mixing-animation">
-                            <div class="mix-node"></div>
-                            <div class="mix-node"></div>
-                            <div class="mix-node"></div>
-                            <div class="mix-connection"></div>
-                            <div class="mix-connection"></div>
-                        </div>
-                        <p class="stage-text">Transaction Mixing Protocol...</p>
-                        <p class="stage-subtext">Obfuscating transaction trail through mixing pool</p>
-                    </div>
-                    <div class="animation-stage hidden" id="stage4">
-                        <div class="privacy-level-badge">Level 5</div>
-                        <div class="progress-container">
-                            <div class="progress-bar" id="progressBar"></div>
-                        </div>
-                        <p class="stage-text">Finalizing Privacy Layer...</p>
-                        <p class="stage-subtext" id="confirmationSubtext">Confirming transaction through privacy network</p>
-                        <p class="confirmation-count" id="confirmationCount">Processing... 0/5</p>
-                    </div>
-                    <div class="animation-stage hidden" id="stage5">
-                        <div class="privacy-level-badge">Level 6</div>
-                        <div class="reassembly-animation">
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                        </div>
-                        <p class="stage-text">Reassembling at Destination...</p>
-                        <p class="stage-subtext">Reconstructing funds through privacy network</p>
-                    </div>
-                    <div class="animation-stage hidden" id="stage8">
-                        <div class="privacy-level-badge">Merkle Proof</div>
-                        <div class="merkle-container" id="merkleTree"></div>
-                        <p class="stage-text">Merkle Tree Verification...</p>
-                        <p class="stage-subtext">Building cryptographic proof tree</p>
-                    </div>
-                    <div class="animation-stage hidden" id="stage6">
-                        <div class="success-icon">✓</div>
-                        <p class="stage-text success">Transfer Complete!</p>
-                        <p class="stage-subtext success">Privacy levels: 6/6 achieved</p>
-                        <p class="tx-hash" id="txHash"></p>
-                    </div>
-                </div>
+            <div class="card hidden" id="animationCard" style="margin-top: 30px; text-align: center;">
+                <h2>PRIVACY PROCESSING</h2>
+                <div id="stage1" class="stage-text">INITIALIZING NODES...</div>
+                <div id="progressBar" style="width: 0%; height: 5px; background: var(--neon-yellow); margin-top: 10px;"></div>
+                <div id="txHash" style="margin-top: 20px; color: var(--neon-cyan); word-break: break-all;"></div>
+                
+                <!-- Additional animation stages (preserved for app.js compatibility) -->
+                <div class="hidden" id="stage2"></div>
+                <div class="hidden" id="stage3"></div>
+                <div class="hidden" id="stage4"></div>
+                <div class="hidden" id="stage5"></div>
+                <div class="hidden" id="stage6"></div>
+                <div class="hidden" id="stage7"></div>
+                <div class="hidden" id="stage8"></div>
             </div>
 
             <!-- Classified Protocol Timeline -->
-            <div class="card roadmap-section">
-                <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #00ff00;">
-                    <p style="color: #00ff00; font-size: 14px; margin: 0; text-align: center;">
+            <div class="card" style="margin-top: 40px;">
+                <h2>PROTOCOL_TIMELINE</h2>
+                <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid var(--neon-cyan);">
+                    <p style="color: var(--neon-cyan); font-size: 14px; margin: 0; text-align: center;">
                         ⚠️ This GitHub page is a proof of concept demonstration
                     </p>
                 </div>
-                <h2><span class="glitch-text">PROTOCOL_TIMELINE</span></h2>
                 
-                <div class="roadmap-grid">
-                    <div class="roadmap-card active">
-                        <h3>PHASE I: GENESIS</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="background: rgba(0, 0, 0, 0.6); border: 1px solid var(--neon-cyan); padding: 20px;">
+                        <h3 style="color: var(--neon-cyan); margin-bottom: 10px;">PHASE I: GENESIS</h3>
                         <p>• Ghost Shard Routing [ACTIVE]</p>
                         <p>• Black Mirror Wallet Integration</p>
                         <p>• Merkle Verification Layer</p>
-                        <div style="margin-top:10px; color: var(--neon-green); font-size: 0.8em;">STATUS: DEPLOYED</div>
+                        <div style="margin-top:10px; color: var(--neon-cyan); font-size: 0.8em;">STATUS: DEPLOYED</div>
                     </div>
-                    <div class="roadmap-card locked">
-                        <div class="lock-overlay">🔒</div>
-                        <h3>PHASE II: [ENCRYPTED]</h3>
-                        <div class="redacted-text"></div>
-                        <div class="redacted-text" style="width: 60%"></div>
-                        <div class="redacted-text" style="width: 90%"></div>
+                    <div style="background: rgba(0, 0, 0, 0.6); border: 1px solid #333; padding: 20px; opacity: 0.7; position: relative;">
+                        <div style="position: absolute; top: 10px; right: 10px; font-size: 1.2em; color: #555;">🔒</div>
+                        <h3 style="color: #555; margin-bottom: 10px;">PHASE II: [ENCRYPTED]</h3>
+                        <div style="background: #222; height: 1em; width: 80%; margin-bottom: 5px; border-radius: 2px;"></div>
+                        <div style="background: #222; height: 1em; width: 60%; margin-bottom: 5px; border-radius: 2px;"></div>
+                        <div style="background: #222; height: 1em; width: 90%; margin-bottom: 5px; border-radius: 2px;"></div>
                         <div style="margin-top:10px; color: #555; font-size: 0.8em;">STATUS: PENDING DECRYPTION</div>
                     </div>
-                    <div class="roadmap-card locked">
-                        <div class="lock-overlay">🔒</div>
-                        <h3>PHASE III: [NO SIGNAL]</h3>
-                        <div class="redacted-text" style="width: 50%"></div>
-                        <div class="redacted-text"></div>
-                        <div class="redacted-text" style="width: 70%"></div>
+                    <div style="background: rgba(0, 0, 0, 0.6); border: 1px solid #333; padding: 20px; opacity: 0.7; position: relative;">
+                        <div style="position: absolute; top: 10px; right: 10px; font-size: 1.2em; color: #555;">🔒</div>
+                        <h3 style="color: #555; margin-bottom: 10px;">PHASE III: [NO SIGNAL]</h3>
+                        <div style="background: #222; height: 1em; width: 50%; margin-bottom: 5px; border-radius: 2px;"></div>
+                        <div style="background: #222; height: 1em; width: 100%; margin-bottom: 5px; border-radius: 2px;"></div>
+                        <div style="background: #222; height: 1em; width: 70%; margin-bottom: 5px; border-radius: 2px;"></div>
                         <div style="margin-top:10px; color: #555; font-size: 0.8em;">STATUS: CLASSIFIED</div>
                     </div>
                 </div>
                 
-                <div style="margin-top: 30px; padding: 15px; background: rgba(0,255,0,0.05); border-radius: 8px; border-left: 4px solid var(--neon-green);">
-                    <p style="margin: 0; color: var(--neon-green); font-size: 14px; font-family: var(--font-code);">
+                <div style="margin-top: 30px; padding: 15px; background: rgba(0,255,0,0.05); border-radius: 8px; border-left: 4px solid var(--neon-cyan);">
+                    <p style="margin: 0; color: var(--neon-cyan); font-size: 14px;">
                         <strong>CLASSIFIED:</strong> Advanced protocols require clearance level 5+. Mathematical proofs of anonymity. Unkillable infrastructure. Zero-knowledge cryptography.
                     </p>
                 </div>
             </div>
+
+            <div style="margin-top: 40px; text-align: center; color: #555; font-size: 0.8em;">
+                ⚠ PROOF OF CONCEPT // GITHUB PAGES DEPLOYMENT
+            </div>
         </div>
+
+        <!-- RIGHT WALL: Use Cases -->
+        <div class="alley-side right-wall">
+            <div class="neon-sign sign-yellow">
+                MIXING POOL
+                <span class="sign-sub">High-Entropy Routing</span>
+            </div>
+            <div class="neon-sign sign-pink">
+                BLACK MIRROR
+                <span class="sign-sub">Dual-Vault System</span>
+            </div>
+            <div class="neon-sign sign-yellow">
+                ANTI-MEV
+                <span class="sign-sub">Sandwich Protection</span>
+            </div>
+        </div>
+
     </div>
 
     <script src="/app.js"></script>
@@ -295,7 +233,7 @@
             const address = walletPublicKey.toString();
 
             status.innerText = "⏳ Requesting 0.02 DEVNET SOL...";
-            status.style.color = "var(--neon-blue)";
+            status.style.color = "var(--neon-cyan)";
 
             try {
                 const apiUrl = CONFIG.API_URL || 'http://localhost:3000';
@@ -308,8 +246,8 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    status.innerHTML = `✅ Sent! <a href="${data.solscan}" target="_blank" style="color: var(--neon-green); text-decoration: underline;">View TX on Solscan</a>`;
-                    status.style.color = "var(--neon-green)";
+                    status.innerHTML = `✅ Sent! <a href="${data.solscan}" target="_blank" style="color: var(--neon-yellow); text-decoration: underline;">View TX on Solscan</a>`;
+                    status.style.color = "var(--neon-yellow)";
                 } else {
                     status.innerText = `❌ ${data.error || 'Unknown error'}`;
                     status.style.color = "#ff0055";
@@ -352,4 +290,3 @@
     </script>
 </body>
 </html>
-
