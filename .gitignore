@@ -13,9 +13,15 @@ build/
 !package.json
 !package-lock.json
 !public/config.json
+# config.js is now merged into app.js (obfuscated), keep original locally only
 !public/config.js
 !tsconfig.json
 !tsconfig.*.json
+
+# Obfuscation backups - keep originals local only
+public/app.original.js
+public/config.original.js
+obfuscate.js
 
 # Private keys and wallet files
 *.txt
