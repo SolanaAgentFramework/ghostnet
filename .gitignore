@@ -40,8 +40,8 @@ farming_log.txt
 *.log
 
 # Server configs with keys
-server.js
-!public/
+# server.js - REMOVED: Need to deploy to Render
+# !public/
 
 # Test scripts with keys
 test_*.js
