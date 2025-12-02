@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Switch Phantom to Devnet - Tutorial</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tutorial-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .tutorial-step {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-left: 4px solid var(--neon-green);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        .tutorial-step h3 {
+            color: var(--neon-green);
+            font-family: var(--font-tech);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .tutorial-step p {
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        .tutorial-step code {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 3px 8px;
+            border-radius: 2px;
+            color: var(--neon-green);
+            font-family: var(--font-code);
+        }
+        .youtube-container {
+            margin: 30px 0;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            border-radius: 4px;
+        }
+        .youtube-container iframe {
+            max-width: 100%;
+            border: 2px solid var(--neon-purple);
+            border-radius: 4px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-family: var(--font-tech);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+        .warning-box {
+            background: rgba(255, 170, 0, 0.1);
+            border: 1px solid #ffaa00;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning-box h4 {
+            color: #ffaa00;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tutorial-container">
+        <a href="/" class="back-link">← BACK TO MAIN PAGE</a>
+        
+        <header style="text-align: center; margin-bottom: 50px;">
+            <h1 style="font-family: var(--font-tech); color: var(--neon-green); text-transform: uppercase; letter-spacing: 4px;">
+                📚 PHANTOM DEVNET TUTORIAL
+            </h1>
+            <p class="subtitle" style="color: var(--neon-purple); margin-top: 10px;">
+                How to Switch Your Phantom Wallet to Devnet (For Testing)
+            </p>
+        </header>
+
+        <div class="warning-box">
+            <h4>⚠️ IMPORTANT: This is DEVNET Only!</h4>
+            <p>Devnet SOL has <strong>NO REAL VALUE</strong>. It's free test money for developers. Never send real SOL to devnet addresses!</p>
+        </div>
+
+        <div class="tutorial-step">
+            <h3>Step 1: Open Phantom Wallet</h3>
+            <p>Make sure you have the <a href="https://phantom.app" target="_blank" style="color: var(--neon-blue);">Phantom browser extension</a> installed.</p>
+            <p>Click the Phantom icon in your browser toolbar to open the wallet.</p>
+        </div>
+
+        <div class="tutorial-step">
+            <h3>Step 2: Open Settings</h3>
+            <p>In the Phantom wallet popup, click the <strong>⚙️ Settings</strong> icon located in the <strong>bottom-left corner</strong> of the wallet interface.</p>
+            <p style="color: var(--neon-green);"><strong>Note:</strong> The settings icon position may vary, but in the latest version it's typically in the bottom-left.</p>
+        </div>
+
+        <div class="tutorial-step">
+            <h3>Step 3: Enable Testnet Mode</h3>
+            <p>In the Settings menu, scroll down and look for <strong>"Developer Settings"</strong> section.</p>
+            <p>Find the <strong>"Testnet Mode"</strong> toggle and turn it <strong>ON</strong> (toggle it to the right/enabled position).</p>
+            <p style="color: var(--neon-blue);"><strong>💡 Tip:</strong> This enables developer/testnet features in Phantom.</p>
+        </div>
+
+        <div class="tutorial-step">
+            <h3>Step 4: Switch to Devnet</h3>
+            <p>After enabling Testnet Mode, go back to the main Settings menu.</p>
+            <p>Look for and click on <strong>"Change Network"</strong> option.</p>
+            <p>You'll see a list of available networks:</p>
+            <ul style="color: var(--text-primary); margin-left: 20px; line-height: 2;">
+                <li><code>Solana Mainnet</code> (Real SOL - has value) ⚠️</li>
+                <li><code>Solana Devnet</code> (Test SOL - FREE) ✅</li>
+                <li><code>Solana Testnet</code> (Another test network)</li>
+            </ul>
+            <p>Select <strong><code>Solana Devnet</code></strong> from the list.</p>
+            <p style="color: var(--neon-green); margin-top: 10px;"><strong>✅ You're now on Devnet!</strong> Your wallet will show "Devnet" badge and your balance will reset (this is normal - devnet SOL is separate from mainnet).</p>
+        </div>
+
+        <div class="tutorial-step">
+            <h3>Step 5: Verify You're on Devnet</h3>
+            <p>After switching, check your wallet address. Devnet addresses look the same as mainnet, but:</p>
+            <ul style="color: var(--text-primary); margin-left: 20px; line-height: 2;">
+                <li>You'll see "Devnet" badge in Phantom</li>
+                <li>Your balance will reset (devnet SOL is separate)</li>
+                <li>Transactions will be on devnet.solana.com</li>
+            </ul>
+        </div>
+
+        <div class="tutorial-step">
+            <h3>Step 6: Get Free Devnet SOL</h3>
+            <p>Now that you're on Devnet, you can:</p>
+            <ol style="color: var(--text-primary); margin-left: 20px; line-height: 2;">
+                <li>Go back to the <a href="/" style="color: var(--neon-green);">main page</a></li>
+                <li>Connect your Phantom wallet</li>
+                <li>Click <strong>"🎁 GIMME 0.02 DEVNET SOL"</strong> to get free test SOL!</li>
+            </ol>
+            <p style="margin-top: 15px; color: var(--neon-green);">
+                <strong>Note:</strong> You can request 0.02 SOL once per hour per wallet/IP address.
+            </p>
+        </div>
+
+        <div class="youtube-container">
+            <h3 style="color: var(--neon-purple); margin-bottom: 20px; font-family: var(--font-tech);">
+                🎥 VIDEO TUTORIAL (For Visual Learners)
+            </h3>
+            <p style="color: #aaa; margin-bottom: 20px;">
+                Watch this YouTube tutorial if you're still confused:
+            </p>
+            <!-- YouTube embed -->
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 0 auto; border: 2px solid var(--neon-purple); border-radius: 4px;">
+                <iframe 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                    src="https://www.youtube.com/embed/6o9lAZv2zAs" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p style="margin-top: 15px; color: var(--neon-green);">
+                <strong>Direct Link:</strong> 
+                <a href="https://www.youtube.com/watch?v=6o9lAZv2zAs" 
+                   target="_blank" 
+                   style="color: var(--neon-blue); text-decoration: underline;">
+                    Watch on YouTube
+                </a>
+            </p>
+            <p style="margin-top: 10px;">
+                <a href="https://www.youtube.com/results?search_query=phantom+wallet+switch+devnet+solana" 
+                   target="_blank" 
+                   style="color: var(--neon-blue); text-decoration: underline; font-size: 0.9em;">
+                    🔍 Search for more tutorials on YouTube
+                </a>
+            </p>
+        </div>
+
+        <div class="tutorial-step">
+            <h3>⚠️ Common Issues & Solutions</h3>
+            <p><strong>Problem:</strong> "I don't see Devnet option"</p>
+            <p><strong>Solution:</strong> Make sure you have the latest version of Phantom. Update it from the Chrome/Edge/Firefox extension store.</p>
+            
+            <p style="margin-top: 15px;"><strong>Problem:</strong> "My balance is 0 on Devnet"</p>
+            <p><strong>Solution:</strong> That's normal! Devnet SOL is separate from mainnet. Use the faucet on this site to get free test SOL.</p>
+            
+            <p style="margin-top: 15px;"><strong>Problem:</strong> "I can't connect my wallet"</p>
+            <p><strong>Solution:</strong> Make sure you're on Devnet in Phantom, then refresh this page and try connecting again.</p>
+        </div>
+
+        <div class="tutorial-step" style="border-left-color: var(--neon-blue);">
+            <h3 style="color: var(--neon-blue);">💡 Pro Tips</h3>
+            <ul style="color: var(--text-primary); margin-left: 20px; line-height: 2;">
+                <li>You can switch between Mainnet and Devnet anytime - your wallets are separate</li>
+                <li>Devnet transactions are free and instant (no real gas fees)</li>
+                <li>Always double-check you're on the right network before sending real money</li>
+                <li>Bookmark this page for easy access to the faucet!</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; padding: 30px; background: rgba(0, 243, 255, 0.05); border: 1px solid var(--neon-blue); border-radius: 4px;">
+            <h3 style="color: var(--neon-green); margin-bottom: 15px;">Ready to Test?</h3>
+            <a href="/" class="btn btn-success" style="display: inline-block; padding: 15px 40px; text-decoration: none; font-size: 1.2em;">
+                🚀 GO TO FAUCET PAGE
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add particle background (reuse from main page)
+        function initParticles() {
+            const canvas = document.createElement('canvas');
+            canvas.id = 'bg-canvas';
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.zIndex = '-1';
+            canvas.style.opacity = '0.6';
+            document.body.prepend(canvas);
+            const ctx = canvas.getContext('2d');
+            
+            let width, height;
+            let particles = [];
+            
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.size = Math.random() * 2;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.fillStyle = 'rgba(0, 243, 255, 0.5)';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            function init() {
+                resize();
+                for (let i = 0; i < 50; i++) particles.push(new Particle());
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                    particles.forEach(p2 => {
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx*dx + dy*dy);
+                        if (dist < 150) {
+                            ctx.strokeStyle = `rgba(0, 243, 255, ${0.1 - dist/1500})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    });
+                });
+                requestAnimationFrame(animate);
+            }
+            
+            window.addEventListener('resize', resize);
+            init();
+            animate();
+        }
+        
+        document.addEventListener('DOMContentLoaded', initParticles);
+    </script>
+</body>
+</html>
+

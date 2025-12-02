@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Transaction Flow - Smoke & Mirrors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        
+        .flow-diagram {
+            background: #111;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        .wallet-box {
+            background: #1a1a1a;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .wallet-box::before {
+            content: '💰';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #0a0a0a;
+            padding: 5px 10px;
+            font-size: 1.5em;
+        }
+        
+        .arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #00ff00;
+            margin: 10px 0;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .transaction {
+            background: #222;
+            border-left: 4px solid #00ff00;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .transaction.decoy {
+            border-left-color: #ffaa00;
+            background: #2a1a00;
+        }
+        
+        .transaction.real {
+            border-left-color: #00ff00;
+            background: #002a00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        
+        .transaction.service {
+            border-left-color: #ff00ff;
+            background: #2a002a;
+        }
+        
+        .label {
+            color: #00ffff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .amount {
+            color: #00ff00;
+            font-size: 1.1em;
+        }
+        
+        .fee {
+            color: #ffaa00;
+            font-size: 0.9em;
+        }
+        
+        .cost-badge {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        
+        .profit-badge {
+            display: inline-block;
+            background: #00ff00;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        
+        .timeline {
+            background: #1a1a1a;
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .timeline-item {
+            padding: 10px;
+            border-left: 3px solid #00ff00;
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .summary {
+            background: #001a00;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .summary h2 {
+            color: #00ff00;
+            margin-bottom: 15px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #003300;
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎭 THE REAL SMOKE & MIRRORS DANCE 🎭</h1>
+        <p style="text-align: center; color: #00ffff; margin-bottom: 30px;">
+            Actual Transaction Flow (Not Simulation!)
+        </p>
+        
+        <div class="flow-diagram">
+            <!-- User Wallet -->
+            <div class="wallet-box">
+                <div class="label">👤 USER WALLET (Wallet A)</div>
+                <div style="color: #00ff00; margin-top: 10px;">Balance: X SOL</div>
+                <div style="color: #ffaa00; margin-top: 5px;">Sends: Amount + 0.35% + 0.00002 SOL</div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Decoys -->
+            <div class="transaction decoy">
+                <div class="label">🎭 DECOY TRANSACTIONS (SMOKE SCREEN)</div>
+                <div class="transaction decoy">
+                    <div class="label">Decoy 1:</div>
+                    <div class="amount">→ Random Address 1</div>
+                    <div class="fee">Amount: 0.0001-0.001 SOL (random)</div>
+                    <div class="fee">Fee: 0.000005 SOL (User pays)</div>
+                </div>
+                <div class="transaction decoy">
+                    <div class="label">Decoy 2:</div>
+                    <div class="amount">→ Random Address 2</div>
+                    <div class="fee">Amount: 0.0001-0.001 SOL (random)</div>
+                    <div class="fee">Fee: 0.000005 SOL (User pays)</div>
+                </div>
+                <div class="transaction decoy">
+                    <div class="label">Decoy 3:</div>
+                    <div class="amount">→ Random Address 3</div>
+                    <div class="fee">Amount: 0.0001-0.001 SOL (random)</div>
+                    <div class="fee">Fee: 0.000005 SOL (User pays)</div>
+                </div>
+                <div style="color: #ffaa00; margin-top: 10px; font-style: italic;">
+                    ⚡ All sent simultaneously to create noise ⚡
+                </div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Main Transaction -->
+            <div class="transaction real">
+                <div class="label">✅ MAIN TRANSACTION (REAL)</div>
+                <div class="amount">User → Vault Wallet</div>
+                <div class="fee">Amount: X + 0.35% + 0.00002 SOL</div>
+                <div class="fee">Fee: 0.000005 SOL (User pays)</div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Vault -->
+            <div class="wallet-box">
+                <div class="label">🏦 VAULT WALLET</div>
+                <div style="color: #00ff00; margin-top: 10px;">
+                    Receives: X + 0.35% + 0.00002 SOL
+                </div>
+                <div style="color: #ff00ff; margin-top: 5px;">
+                    Keeps: 0.35% (Service Fee) <span class="profit-badge">YOUR REVENUE</span>
+                </div>
+                <div style="color: #00ffff; margin-top: 5px;">
+                    Holds: X + 0.00002 SOL (for routing)
+                </div>
+                <div style="color: #ffaa00; margin-top: 10px; font-style: italic;">
+                    [WAIT: Random 2.4-6.4 seconds for privacy]
+                </div>
+                <div style="color: #ffaa00; font-style: italic;">
+                    [CHECK: Transaction confirmed]
+                </div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Vault to Black Mirror -->
+            <div class="transaction service">
+                <div class="label">🔄 TRANSACTION 2: Vault → Black Mirror</div>
+                <div class="amount">Amount: X - 0.35% (service fee kept in vault)</div>
+                <div class="fee">Fee: 0.000005 SOL <span class="cost-badge">YOU PAY THIS!</span></div>
+                <div style="color: #ff00ff; margin-top: 5px;">Signature: Vault wallet (server)</div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Black Mirror -->
+            <div class="wallet-box">
+                <div class="label">🪞 BLACK MIRROR WALLET (The Ghost)</div>
+                <div style="color: #00ff00; margin-top: 10px;">
+                    Receives: X - 0.35% - 0.00001 SOL
+                </div>
+                <div style="color: #ffaa00; margin-top: 10px; font-style: italic;">
+                    [WAIT: 1 second for settlement]
+                </div>
+                <div style="color: #ffaa00; font-style: italic;">
+                    [BALANCE CHECK: Verify funds received]
+                </div>
+                <div style="color: #00ffff; margin-top: 10px; font-weight: bold;">
+                    🎭 NO DIRECT CONNECTION TO USER! 🎭
+                </div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Black Mirror to Destination -->
+            <div class="transaction service">
+                <div class="label">🎯 TRANSACTION 3: Black Mirror → Wallet B</div>
+                <div class="amount">Amount: X - 0.35% - 0.00002 SOL (final amount)</div>
+                <div class="fee">Fee: 0.000005 SOL <span class="cost-badge">YOU PAY THIS!</span></div>
+                <div style="color: #ff00ff; margin-top: 5px;">Signature: Black Mirror wallet (server)</div>
+            </div>
+            
+            <div class="arrow">⬇️</div>
+            
+            <!-- Destination -->
+            <div class="wallet-box">
+                <div class="label">✅ DESTINATION (Wallet B)</div>
+                <div style="color: #00ff00; margin-top: 10px; font-size: 1.2em;">
+                    Receives: X - 0.35% - 0.00002 SOL
+                </div>
+                <div style="color: #00ff00; margin-top: 10px; font-weight: bold;">
+                    ✅ TRANSACTION COMPLETE ✅
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline -->
+        <div class="timeline">
+            <h2 style="color: #00ff00; margin-bottom: 15px;">⏱️ ACTUAL TIMELINE</h2>
+            <div class="timeline-item">
+                <strong>T+0.0s:</strong> User signs transaction
+            </div>
+            <div class="timeline-item">
+                <strong>T+0.1s:</strong> Decoy 1 sent
+            </div>
+            <div class="timeline-item">
+                <strong>T+0.2s:</strong> Decoy 2 sent
+            </div>
+            <div class="timeline-item">
+                <strong>T+0.3s:</strong> Decoy 3 sent
+            </div>
+            <div class="timeline-item">
+                <strong>T+0.4s:</strong> Main transaction sent to Vault
+            </div>
+            <div class="timeline-item">
+                <strong>T+2.4-6.4s:</strong> Random privacy delay
+            </div>
+            <div class="timeline-item">
+                <strong>T+3.0s:</strong> Vault transaction confirmed
+            </div>
+            <div class="timeline-item">
+                <strong>T+3.1s:</strong> Vault → Black Mirror sent
+            </div>
+            <div class="timeline-item">
+                <strong>T+4.1s:</strong> Black Mirror receives funds
+            </div>
+            <div class="timeline-item">
+                <strong>T+4.2s:</strong> Black Mirror → Wallet B sent
+            </div>
+            <div class="timeline-item">
+                <strong>T+5.0s:</strong> ✅ COMPLETE
+            </div>
+        </div>
+        
+        <!-- Summary -->
+        <div class="summary">
+            <h2>💰 YOUR COSTS & REVENUE</h2>
+            <div class="summary-item">
+                <span>Vault → Black Mirror Fee:</span>
+                <span style="color: #ff0000;">0.000005 SOL</span>
+            </div>
+            <div class="summary-item">
+                <span>Black Mirror → Destination Fee:</span>
+                <span style="color: #ff0000;">0.000005 SOL</span>
+            </div>
+            <div class="summary-item" style="border-top: 2px solid #00ff00; margin-top: 10px; padding-top: 15px;">
+                <span style="font-weight: bold;">TOTAL COST TO YOU:</span>
+                <span style="color: #ff0000; font-weight: bold; font-size: 1.2em;">0.00001 SOL</span>
+            </div>
+            <div class="summary-item" style="margin-top: 20px;">
+                <span>Service Fee Revenue (0.35%):</span>
+                <span style="color: #00ff00;">0.35% of amount</span>
+            </div>
+            <div class="summary-item">
+                <span>Example (0.1 SOL transfer):</span>
+                <span style="color: #00ff00;">0.00035 SOL revenue</span>
+            </div>
+            <div class="summary-item" style="border-top: 2px solid #00ff00; margin-top: 10px; padding-top: 15px;">
+                <span style="font-weight: bold;">YOUR PROFIT:</span>
+                <span style="color: #00ff00; font-weight: bold; font-size: 1.2em;">0.00034 SOL</span>
+            </div>
+            <div class="summary-item" style="margin-top: 20px; color: #ffaa00;">
+                <span>Minimum Amount: 0.003 SOL (break-even)</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

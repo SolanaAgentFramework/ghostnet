@@ -1,0 +1,57 @@
+node_modules/
+wallets/
+farmed_wallets/
+accounting/
+*.log
+.env
+.DS_Store
+dist/
+build/
+
+# Sensitive files - NEVER commit these!
+*.json
+!package.json
+!package-lock.json
+!public/config.json
+!public/config.js
+!tsconfig.json
+!tsconfig.*.json
+
+# Private keys and wallet files
+*.txt
+!README*.txt
+!LICENSE*.txt
+*-phantom.txt
+*-master.json
+*-master-phantom.txt
+vault*.json
+blackmirror*.json
+faucet*.json
+mixing_pool.json
+
+# Logs and test data
+farming_log.txt
+*.log
+
+# Server configs with keys
+server.js
+!public/
+
+# Test scripts with keys
+test_*.js
+farm*.js
+fund*.js
+check_*.js
+create_*.js
+get_*.js
+find_*.js
+transfer_*.js
+send_*.js
+quick_*.js
+simple_*.js
+airdop*.js
+process_*.js
+setup_*.js
+update_*.sh
+update_*.bat
+
