@@ -2,6 +2,7 @@ services:
   - type: web
     name: dead-drop-backend
     env: node
+    rootDir: pumpfun
     buildCommand: npm install
     startCommand: node server.js
     envVars:
